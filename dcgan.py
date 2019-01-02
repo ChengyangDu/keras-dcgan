@@ -150,6 +150,8 @@ def get_args():
     parser.add_argument("--mode", type=str)
     parser.add_argument("--batch_size", type=int, default=128)
     parser.add_argument("--nice", dest="nice", action="store_true")
+    parser.add_argument("--draw", type=str, default = 'g')
+
     parser.set_defaults(nice=False)
     args = parser.parse_args()
     return args
@@ -160,3 +162,10 @@ if __name__ == "__main__":
         train(BATCH_SIZE=args.batch_size)
     elif args.mode == "generate":
         generate(BATCH_SIZE=args.batch_size, nice=args.nice)
+    else:
+        if args.draw == 'g':
+            g = generator_model()
+            g.summary()
+        if args.draw == 'd':
+            d = discriminator_model()
+            d.summary()
